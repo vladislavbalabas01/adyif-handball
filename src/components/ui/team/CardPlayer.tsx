@@ -1,7 +1,7 @@
 import { Player } from "@/types/interfaces";
 import Image from "next/image";
 
-const host = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+const host = process.env.NEXT_PUBLIC_BASE_URL || "http://195.208.61.107:3000";
 
 export const CardPlayer = ({ player }: { player: Player }) => {
   return (
