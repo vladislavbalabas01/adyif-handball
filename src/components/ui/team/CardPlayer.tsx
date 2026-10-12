@@ -12,7 +12,8 @@ export const CardPlayer = ({ player }: { player: Player }) => {
         <div className="absolute right-0 bottom-0 w-9/10 h-9/10">
           <Image
             src={
-              `/${player.photo?.url}` || "/images/players/default-player.png"
+              `${process.env.NEXT_PUBLIC_BASE_URL}${player.photo?.url}` ||
+              "/images/players/default-player.png"
             }
             alt={player.photo?.altText || "Player photo"}
             className="object-contain"
