@@ -1,0 +1,4 @@
+195.208.61.107 {
+    tls internal
+    reverse_proxy web:3000
+}

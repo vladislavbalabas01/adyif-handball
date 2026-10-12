@@ -22,8 +22,8 @@ services:
       dockerfile: Dockerfile
     container_name: adyif_web
     restart: always
-    ports:
-      - "3000:3000"
+    # ports:
+    #   - "3000:3000"
     environment:
       # Важно: вместо localhost пишем имя сервиса базы данных "postgres"
       DATABASE_URL: "postgresql://postgres:diff2320@postgres:5432/adyif_db?schema=public"
@@ -36,9 +36,28 @@ services:
     networks:
       - adyif_network
 
+  # Caddy service
+  caddy:
+    image: caddy:2-alpine
+    container_name: adyif_caddy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - web
+    networks:
+      - adyif_network
+
 volumes:
   postgres_data:
   players_uploads:
+  caddy_data:
+  caddy_config:
 
 networks:
   adyif_network:
