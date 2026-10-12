@@ -1,0 +1,45 @@
+services:
+  # Database service
+  postgres:
+    image: postgres:16-alpine
+    container_name: adyif_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: diff2320
+      POSTGRES_DB: adyif_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - adyif_network
+
+  # Web application service
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: adyif_web
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      # Важно: вместо localhost пишем имя сервиса базы данных "postgres"
+      DATABASE_URL: "postgresql://postgres:diff2320@postgres:5432/adyif_db?schema=public"
+      NODE_ENV: production
+    volumes:
+      # Сохраняем загруженные фото игроков на диске сервера
+      - players_uploads:/app/public/uploads/players
+    depends_on:
+      - postgres
+    networks:
+      - adyif_network
+
+volumes:
+  postgres_data:
+  players_uploads:
+
+networks:
+  adyif_network:
+    driver: bridge

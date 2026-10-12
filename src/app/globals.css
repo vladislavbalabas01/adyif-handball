@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #171717;
+  --foreground: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --font-noto-sans: "Noto Sans", sans-serif;
+  --font-griffy: var(--font-griffy);
+
+  --color-green-primary: #2d8909;
+  --color-green-light: #0bda51;
+  --color-green-dark: #1d4908;
+  --color-gold-primary: #fae177;
+  --color-gold-dark: #d49d3b;
+  --color-accent: "#dc2626";
+  --color-dark: "#020617";
+
+  --breakpoint-sm: 36rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 62rem;
+  --breakpoint-xl: 75rem;
+  --breakpoint-2xl: 87.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer components {
+  .btn-primary {
+    color: white;
+    background-color: var(--color-green-light);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+  }
+  .custom-shape {
+    clip-path: polygon(100% 62%, 90% 100%, 0% 100%, 10% 62%);
+  }
+
+  html {
+    color-scheme: dark;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .container {
+    max-width: 23rem;
+    margin-inline: auto;
+    @media (width >= 36rem) {
+      max-width: 33.75rem;
+    }
+    @media (width >= 48rem) {
+      max-width: 45rem;
+    }
+    @media (width >= 62rem) {
+      max-width: 60rem;
+    }
+    @media (width >= 75rem) {
+      max-width: 71.25rem;
+    }
+    @media (width >= 87.5rem) {
+      max-width: 82.5rem;
+    }
+  }
 }

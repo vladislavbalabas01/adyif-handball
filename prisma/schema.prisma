@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Таблица игроков
+model Player {
+  id          Int       @id @default(autoincrement())
+  lastName      String    @map("last_name")
+  firstName     String    @map("first_name")
+  middleName    String?   @map("middle_name")
+  birthDate     DateTime  @map("birth_date")
+  number        Int    
+  position      String
+  squad         String    
+  height        Int      // Рост в см
+
+  // Связь "один к одному" с таблицей фотографий
+  photoId   Int?     @unique @map("photo_id")
+  photo     Photo?   @relation(fields: [photoId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("players") // Название таблицы в самой базе данных
+}
+
+// Таблица фотографий (медиа)
+model Photo {
+  id        Int      @id @default(autoincrement())
+  url       String   // Путь или URL к изображению
+  altText   String?  @map("alt_text")
+
+  // Обратная связь: у фото может быть один связанный игрок
+  player    Player?
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("photos")
+}
