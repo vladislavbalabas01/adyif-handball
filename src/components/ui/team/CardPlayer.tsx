@@ -1,8 +1,6 @@
 import { Player } from "@/types/interfaces";
 import Image from "next/image";
 
-const host = process.env.NEXT_PUBLIC_BASE_URL || "http://195.208.61.107:3000";
-
 export const CardPlayer = ({ player }: { player: Player }) => {
   return (
     <div className="flex flex-col gap-2">
@@ -13,10 +11,7 @@ export const CardPlayer = ({ player }: { player: Player }) => {
         {/* Player */}
         <div className="absolute right-0 bottom-0 w-9/10 h-9/10">
           <Image
-            src={
-              `${host}${player.photo?.url}` ||
-              "/images/players/default-player.png"
-            }
+            src={`${player.photo?.url}` || "/images/players/default-player.png"}
             alt={player.photo?.altText || "Player photo"}
             className="object-contain"
             fill
