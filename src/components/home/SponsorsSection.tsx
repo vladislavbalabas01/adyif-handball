@@ -45,7 +45,7 @@ const SponsorsSection = () => {
             const sizeClass = isFgr
               ? "w-12 md:w-16 h-16 md:h-20"
               : "w-20 md:w-28 h-20 md:h-28";
-            const colorClass = isFgr ? "" : "brightness-0 invert";
+            const colorClass = isFgr ? "" : "saturate-0";
 
             return (
               <Link
