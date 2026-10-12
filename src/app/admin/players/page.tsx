@@ -9,7 +9,41 @@ const initialState: ActionState = {
   message: "",
 };
 
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "diff2320"; // Пароль по умолчанию, если переменная окружения не установлена
+
 export default function AdminPlayersPage() {
+  // Состояния авторизации
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [passwordInput, setPasswordInput] = useState<string>("");
+  const [authError, setAuthError] = useState<string>("");
+  const [isLoadingAuth, setIsLoadingAuth] = useState<boolean>(true);
+
+  // Проверяем, вводился ли пароль в этой вкладке ранее
+  useEffect(() => {
+    const savedAuth = sessionStorage.getItem("admin_authorized");
+    if (savedAuth === "true") {
+      setIsAuthenticated(true);
+    }
+    setIsLoadingAuth(false);
+  }, []);
+
+  const handlePasswordSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (passwordInput === ADMIN_PASSWORD) {
+      sessionStorage.setItem("admin_authorized", "true");
+      setIsAuthenticated(true);
+      setAuthError("");
+    } else {
+      setAuthError("Неверный пароль доступа");
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("admin_authorized");
+    setIsAuthenticated(false);
+    setPasswordInput("");
+  };
+
   const [state, formAction, isPending] = useActionState(
     addPlayerAction,
     initialState,
@@ -63,6 +97,68 @@ export default function AdminPlayersPage() {
       handleCancelPhoto(); // Сбрасываем превью изображения после успешной отправки
     }
   }, [state.success]);
+
+  // Пока проверяется sessionStorage — не мелькаем экраном
+  if (isLoadingAuth) {
+    return null;
+  }
+
+  // --- ЭКРАН ВВОДА ПАРОЛЯ ---
+  if (!isAuthenticated) {
+    return (
+      <main className="min-h-[70vh] flex items-center justify-center p-4">
+        <div className="w-full max-w-sm bg-white p-6 rounded-xl shadow-md border border-zinc-200">
+          <div className="flex flex-col items-center mb-5 text-center">
+            <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
+            </div>
+            <h1 className="text-xl font-bold text-zinc-900">Вход в панель</h1>
+            <p className="text-xs text-zinc-500 mt-1">
+              Для доступа к управлению составом требуется пароль
+            </p>
+          </div>
+
+          {authError && (
+            <div className="mb-4 p-2.5 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-md text-center">
+              {authError}
+            </div>
+          )}
+
+          <form onSubmit={handlePasswordSubmit} className="space-y-4">
+            <div>
+              <input
+                type="password"
+                placeholder="Введите пароль"
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                autoFocus
+                className="w-full px-3 py-2 border rounded-md outline-none focus:ring-2 focus:ring-blue-500 text-zinc-900 text-sm"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition text-sm"
+            >
+              Войти
+            </button>
+          </form>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="mt-6 sm:mt-8 md:mt-32 lg:mt-32 xl:mt-34 2xl:mt-36 mb-8">
