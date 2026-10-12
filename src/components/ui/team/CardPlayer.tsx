@@ -11,7 +11,9 @@ export const CardPlayer = ({ player }: { player: Player }) => {
         {/* Player */}
         <div className="absolute right-0 bottom-0 w-9/10 h-9/10">
           <Image
-            src={player.photo?.url || "/images/players/default-player.png"}
+            src={
+              `/${player.photo?.url}` || "/images/players/default-player.png"
+            }
             alt={player.photo?.altText || "Player photo"}
             className="object-contain"
             fill
