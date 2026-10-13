@@ -1,5 +1,5 @@
 import { HeadingOfSection } from "@/components/ui/HeadingOfSection";
-import { CardPlayer } from "@/components/ui/team/CardPlayer";
+import TeamTabs from "@/components/ui/team/TeamTabs";
 import { getPlayers } from "@/services/players.service";
 
 export const dynamic = "force-dynamic";
@@ -12,11 +12,7 @@ const Page = async () => {
       <div className="container">
         <HeadingOfSection text='Состав команды "АГУ-Адыиф"' />
 
-        <div className="pt-xl sm:pt-2xl mb-4xl xs:grid-cols-2 grid auto-rows-[1fr] sm:grid-cols-3 lg:grid-cols-4 gap-3">
-          {allPlayers.map((player) => (
-            <CardPlayer key={player.id} player={player} />
-          ))}
-        </div>
+        <TeamTabs players={allPlayers} />
       </div>
     </main>
   );

@@ -11,7 +11,7 @@ const NewsSection = () => {
 
   return (
     <section className="mt-8 mb-6 container">
-      <LinkHeadingOfSection text="Последние новости" href="/news?page=1" />
+      <LinkHeadingOfSection text="Последние новости *" href="/news?page=1" />
       {/* Сетка */}
       <div className="flex flex-col gap-3 mb-8 sm:px-10 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {latestNews.map((post: NewsItem) => (
@@ -20,8 +20,13 @@ const NewsSection = () => {
         ))}
       </div>
 
-      <div className="flex">
+      <div className="flex mb-6">
         <LinkButton linkName="Больше новостей" href="/news?page=1" />
+      </div>
+
+      <div className="text-slate-400">
+        * Сайт находится в тестовом режиме. Новости не являются актуальными или
+        действительными
       </div>
     </section>
   );

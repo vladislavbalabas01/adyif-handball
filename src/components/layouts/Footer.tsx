@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className="bg-slate-950 text-slate-400 border-t border-slate-800">
       <div className="container mx-auto py-10">
         {/* Основная сетка */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-8 mb-12">
           {/* 1. О клубе */}
           <div className="space-y-4">
             <Logo width={20} />
@@ -36,7 +36,30 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* 3. Контакты и домашняя арена */}
+          {/* 3. Команда */}
+          <div>
+            <h3 className="text-white font-semibold text-lg mb-4">Команда</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link
+                  href={"/team?squad=adyif-1"}
+                  className="hover:text-green-light transition-colors"
+                >
+                  "АГУ-Адыиф"
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={"/team?squad=adyif-2"}
+                  className="hover:text-green-light transition-colors"
+                >
+                  "АГУ-Адыиф" - 2
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* 4. Контакты и домашняя арена */}
           <div>
             <h3 className="text-white font-semibold text-lg mb-4">Контакты</h3>
             <ul className="space-y-3 text-sm">
@@ -67,7 +90,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* 4. Социальные сети */}
+          {/* 5. Социальные сети */}
           <div>
             <h3 className="text-white font-semibold text-lg mb-4">Соцсети</h3>
             <p className="text-sm text-slate-400 mb-4">
