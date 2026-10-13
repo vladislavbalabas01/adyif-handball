@@ -1,3 +1,3 @@
-adyifhandball.ru www.adyifhandball.ru {
+adyifhandball.ru, www.adyifhandball.ru {
     reverse_proxy web:3000
 }
