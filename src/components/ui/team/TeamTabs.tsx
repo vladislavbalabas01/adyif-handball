@@ -7,8 +7,8 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 type PlayerCardItem = ComponentProps<typeof CardPlayer>["player"];
 
 const SQUADS = {
-  "adyif-1": { label: "Основной состав (Адыиф-1)", dbValue: "Адыиф-1" },
-  "adyif-2": { label: "Дубль (Адыиф-2)", dbValue: "Адыиф-2" },
+  "adyif-1": { label: 'АГУ-"Адыиф"-1', dbValue: "Адыиф-1" },
+  "adyif-2": { label: 'АГУ-"Адыиф"-2', dbValue: "Адыиф-2" },
 } as const;
 
 type SquadKey = keyof typeof SQUADS;

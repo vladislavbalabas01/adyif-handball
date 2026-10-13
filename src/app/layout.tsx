@@ -11,8 +11,8 @@ const GeistFont = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "АГУ-Адыиф - официальный сайт",
-  description: "Официальный сайт женской гандбольной команды АГУ-Адыиф",
+  title: 'АГУ-"Адыиф" - официальный сайт',
+  description: 'Официальный сайт женской гандбольной команды АГУ-"Адыиф"',
 };
 
 export default function RootLayout({

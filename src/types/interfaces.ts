@@ -172,7 +172,7 @@ export interface Sponsor {
   title: string;
   slug: string;
   logo: string;
-  isGeneral: boolean;
+  status: string;
 }
 
 export interface NewsPaginationProps {

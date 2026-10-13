@@ -99,7 +99,7 @@ const Footer = () => {
             <div className="flex gap-3">
               {/* VK */}
               <Link
-                href="https://vk.com"
+                href="https://vk.ru/hc_adyif_official"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 font-bold text-xs hover:text-white transition-all"
@@ -111,7 +111,7 @@ const Footer = () => {
               </Link>
               {/* Telegram */}
               <Link
-                href="https://t.me"
+                href="https://t.me/hc_adyif_official"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 font-bold text-xs hover:text-white transition-all"
